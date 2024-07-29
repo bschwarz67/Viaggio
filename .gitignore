@@ -1,0 +1,9 @@
+Migrations/
+obj/
+bin/
+*.db
+*.txt
+secretKey.js
+.vs/
+Viaggio/Properties/
+launchSettings.json
