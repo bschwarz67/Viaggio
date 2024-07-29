@@ -1,0 +1,85 @@
+﻿@model Viaggio.Models.Point
+
+
+@{
+    ViewData["Title"] = "edit route";
+
+}
+
+@section Scripts {
+    <script type="module">
+        import { mapExplorer } from "/js/mapExplorer.js";
+        window.onload = function () {
+            const thisMapExplorer = new mapExplorer();
+            const pointDomObjects = document.getElementsByClassName("points");
+            thisMapExplorer.initMap(pointDomObjects, @ViewData["RouteId"]);
+        };
+
+
+
+    </script>
+    <!--we have now successfully passed our point data from the create page to the edit page, now we have to post edited point data to the
+        db. we also need to zoom in on a point in the map that corresponds to one of the edited points if there is one-->
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/publicRoutes.css" asp-append-version="true" />
+}
+
+
+
+<div id="map" style="height: 400px"></div>
+
+
+
+<!--
+
+
+<form action="/PublicRoutes/Route/" method="post">
+
+    <label for="Index" />
+    <input class="hidden-input" type="number" id="Index" name="Index" value="0" />
+
+
+
+    <input type="submit" value="Save" />
+
+</form>
+
+-->
+
+@foreach (var pair in ViewData)
+{
+    int index = -1;
+    int value;
+    if (int.TryParse(pair.Key, out value) && value < ViewData.Count - 1)
+    {
+        var point = pair.Value as Viaggio.Models.Point;
+        index = point.Index; //write code to make sure this isnt null.
+        string jsonString = "{\"Index\":" + point.Index + ",\"Lat\":" + point.Lat + ",\"Lng\":" + point.Lng + "}";
+
+        <input type="hidden" class="points" value=@jsonString />
+;
+    }
+
+}
+
+
+<form asp-controller="Home" asp-action="Edit" method="post" id="createRouteForm">
+    <div asp-validation-summary="ModelOnly"></div>
+
+
+    <div id="pointInputTemplate">
+        <input asp-for="Lat" />
+        <input asp-for="Lng" />
+        <input asp-for="Index" />
+
+
+
+    </div>
+
+
+
+    <input type="submit" value="Create" />
+
+
+</form>

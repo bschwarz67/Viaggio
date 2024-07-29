@@ -1,0 +1,18 @@
+﻿body {
+}
+
+.hidden-input {
+    visibility: hidden;
+}
+
+.routeInput {
+    height: 0px;
+    padding: 0px;
+    overflow: hidden;
+}
+
+#pointInputTemplate {
+    height: 0px;
+    padding: 0px;
+    overflow: hidden;
+}

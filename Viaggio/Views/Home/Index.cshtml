@@ -1,0 +1,69 @@
+﻿@model Viaggio.Models.Point
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@section Scripts {
+
+    <script type="module">
+        import { mapExplorer } from "/js/mapExplorer.js";
+        window.onload = function () {
+            const thisMapExplorer = new mapExplorer();
+            const pointDomObjects = [];
+            thisMapExplorer.initMap(pointDomObjects, null);
+        };
+    </script>
+    <!--<script type="module" src="~/js/mapExplorer.js" ></script>-->
+
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/publicRoutes.css" asp-append-version="true" />
+}
+
+
+
+<div id="map" style="height: 400px"></div>
+
+
+
+<!--
+
+<form action="/PublicRoutes/Route/" method="post">
+
+    <label for="Index" />
+    <input class="hidden-input" type="number" id="Index" name="Index" value="0" />
+
+
+
+    <input type="submit" value="Save" />
+
+</form>
+
+-->
+
+
+
+
+
+<form asp-controller="Home" asp-action="Create" method="post" id="createRouteForm">
+    <div asp-validation-summary="ModelOnly"></div>
+
+
+    
+        <div id="pointInputTemplate">
+        <input asp-for="Lat" />
+        <input asp-for="Lng" />
+        <input asp-for="Index" />
+        </div>
+
+
+
+    <input type="submit" value="Create" />
+
+
+
+</form>
+
+
+
