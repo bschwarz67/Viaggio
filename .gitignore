@@ -1,6 +1,7 @@
 Migrations/
 obj/
 bin/
+Viaggio/wwwroot/lib/
 *.db
 *.txt
 secretKey.js
